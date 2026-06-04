@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Echoes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f9f7f3;
+      --surface:   #ffffff;
+      --ink:       #1c1917;
+      --muted:     #6b6560;
+      --accent:    #b5813a;
+      --accent-lt: #f0e6d3;
+      --rule:      #e8e3db;
+      --radius:    14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* ── progress bar ─────────────────────────────── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent) 0%, #d4a85a 100%);
+      z-index: 999;
+      transition: width 0.1s linear;
+    }
+
+    /* ── header ───────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(249,247,243,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      z-index: 100;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: var(--ink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-mark svg { display: block; }
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .header-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── hero ─────────────────────────────────────── */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem) 3rem;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px; height: 1px;
+      background: var(--accent);
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+    }
+    .hero-sub {
+      font-size: 0.96rem;
+      color: var(--muted);
+      max-width: 520px;
+    }
+    .hero-meta {
+      margin-top: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .meta-pill {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .meta-pill .label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta-pill .value {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    /* ── divider ──────────────────────────────────── */
+    .divider {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+    .divider hr {
+      border: none;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── toc ──────────────────────────────────────── */
+    .toc-wrap {
+      max-width: 860px;
+      margin: 2.5rem auto 0;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+    .toc {
+      background: var(--accent-lt);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+    }
+    .toc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .toc ol {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.4rem 2rem;
+      counter-reset: toc;
+    }
+    .toc ol li {
+      counter-increment: toc;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .toc ol li::before {
+      content: counter(toc, decimal-leading-zero);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--accent);
+      min-width: 22px;
+    }
+    .toc ol li a {
+      font-size: 0.86rem;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc ol li a:hover { color: var(--accent); }
+
+    /* ── main content ─────────────────────────────── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem clamp(1.5rem, 5vw, 4rem) 6rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+      animation: fadeUp 0.4s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1.25rem;
+    }
+    .section-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      background: var(--ink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+    }
+
+    p {
+      color: #3a3530;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      padding-left: 0;
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+    ul li {
+      padding: 0.35rem 0 0.35rem 1.4rem;
+      position: relative;
+      font-size: 0.95rem;
+      color: #3a3530;
+    }
+    ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+    ul li:last-child { margin-bottom: 0; }
+
+    /* highlight block */
+    .callout {
+      background: var(--accent-lt);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .callout p { color: #5a4520; margin: 0; font-size: 0.9rem; }
+
+    /* contact link */
+    a.mailto {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    a.mailto:hover { border-color: var(--accent); }
+
+    /* third-party links list */
+    .link-list { list-style: none; padding: 0; margin: 0; }
+    .link-list li {
+      border-bottom: 1px solid var(--rule);
+      padding: 0.7rem 0;
+    }
+    .link-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .link-list a {
+      font-size: 0.9rem;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .link-list a:hover { gap: 10px; }
+    .link-list a::after { content: '→'; font-size: 0.85em; }
+
+    /* retention table */
+    .retention-grid {
+      display: grid;
+      gap: 1px;
+      background: var(--rule);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--rule);
+    }
+    .retention-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--surface);
+    }
+    .retention-row.head { background: var(--ink); }
+    .retention-cell {
+      padding: 0.8rem 1rem;
+      font-size: 0.85rem;
+      color: #3a3530;
+      border-right: 1px solid var(--rule);
+    }
+    .retention-cell:last-child { border-right: none; }
+    .retention-row.head .retention-cell {
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-right-color: rgba(255,255,255,0.15);
+    }
+
+    /* ── footer ───────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.55);
+      padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+    }
+    .footer-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .footer-contact {
+      font-size: 0.85rem;
+    }
+    .footer-contact a {
+      color: #d4a85a;
+      text-decoration: none;
+    }
+    .footer-bottom {
+      font-size: 0.78rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 540px) {
+      .toc ol { grid-template-columns: 1fr; }
+      .hero-meta { gap: 1.25rem; }
+      .retention-row { grid-template-columns: 1fr; }
+      .retention-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+      .retention-cell:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ── Header ────────────────────────────────────────────── -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3" fill="white"/>
+          <circle cx="8" cy="8" r="6" stroke="white" stroke-width="1.2" fill="none" opacity="0.5"/>
+        </svg>
+      </div>
+      <span class="logo-name">Echoes</span>
+    </a>
+    <span class="header-label">Privacy Policy</span>
+  </div>
+</header>
+
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-eyebrow">Legal Document</div>
+  <h1>Privacy<br><em>Policy</em></h1>
+  <p class="hero-sub">
+    We believe in transparency. This policy explains what information Echoes collects, how it's used, and the choices you have.
+  </p>
+  <div class="hero-meta">
+    <div class="meta-pill">
+      <span class="label">Effective Date</span>
+      <span class="value">June 4, 2026</span>
+    </div>
+    <div class="meta-pill">
+      <span class="label">Applies To</span>
+      <span class="value">Echoes Mobile App</span>
+    </div>
+    <div class="meta-pill">
+      <span class="label">Service Provider</span>
+      <span class="value">Surag VC</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><hr /></div>
+
+<!-- ── Table of Contents ─────────────────────────────────── -->
+<div class="toc-wrap">
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#info-collection">Information Collection</a></li>
+      <li><a href="#cookies">Cookies &amp; Tracking</a></li>
+      <li><a href="#your-rights">Your Rights</a></li>
+      <li><a href="#ccpa">California Rights (CCPA)</a></li>
+      <li><a href="#ai">Artificial Intelligence</a></li>
+      <li><a href="#third-party">Third-Party Access</a></li>
+      <li><a href="#international">International Transfers</a></li>
+      <li><a href="#opt-out">Opt-Out Rights</a></li>
+      <li><a href="#retention">Data Retention</a></li>
+      <li><a href="#children">Children</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#breach">Data Breach Notice</a></li>
+      <li><a href="#changes">Changes</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- ── Main ──────────────────────────────────────────────── -->
+<main>
+
+  <!-- 1. Information Collection -->
+  <section id="info-collection">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <h2>Information Collection and Use</h2>
+    </div>
+    <div class="card">
+      <p>The Application collects information when you download and use it. The collected information may include:</p>
+      <ul>
+        <li>Your device's Internet Protocol (IP) address</li>
+        <li>Pages visited within the Application, along with time, date, and duration of each visit</li>
+        <li>Total time spent on the Application</li>
+        <li>Your mobile operating system</li>
+        <li>Personally identifiable information you provide, including email address, user ID, age, and gender</li>
+      </ul>
+      <p>The information the Service Provider requests will be retained and used as described in this privacy policy. The Service Provider may use this information to send you important notices, required communications, and — where permitted by law — marketing communications.</p>
+    </div>
+  </section>
+
+  <!-- 2. Cookies -->
+  <section id="cookies">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <h2>Cookies &amp; Tracking Technologies</h2>
+    </div>
+    <div class="card">
+      <p>The Application or its third-party SDKs may use cookies, SDKs, pixels, and similar technologies to support functionality, analytics, or service delivery.</p>
+      <div class="callout">
+        <p>Where required by applicable law, the Service Provider will obtain your consent before using non-essential tracking technologies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Your Rights -->
+  <section id="your-rights">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <h2>Your Rights</h2>
+    </div>
+    <div class="card">
+      <p>You may request access to, correction of, or deletion of your personal data held by the Service Provider. To exercise these rights, or to withdraw consent where processing is based on consent, please contact:</p>
+      <div class="callout">
+        <p><a href="mailto:iamechoe.official@gmail.com" class="mailto">iamechoe.official@gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CCPA -->
+  <section id="ccpa">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <h2>Your California Privacy Rights (CCPA/CPRA)</h2>
+    </div>
+    <div class="card">
+      <p>If you are a California resident, you have the following rights under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA):</p>
+      <ul>
+        <li>The right to know what personal information is collected</li>
+        <li>The right to delete personal information</li>
+        <li>The right to opt out of the sale or sharing of personal information</li>
+        <li>The right to non-discrimination for exercising your privacy rights</li>
+      </ul>
+      <p>To exercise your CCPA/CPRA rights, contact the Service Provider at <a href="mailto:iamechoe.official@gmail.com" class="mailto">iamechoe.official@gmail.com</a>.</p>
+    </div>
+  </section>
+
+  <!-- 5. AI -->
+  <section id="ai">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <h2>Artificial Intelligence</h2>
+    </div>
+    <div class="card">
+      <p>The Application uses Artificial Intelligence (AI) technologies to enhance your experience and provide certain features. AI components may process your data to deliver personalized content, recommendations, or automated functionalities.</p>
+      <div class="callout">
+        <p>All AI processing is performed in accordance with this privacy policy and applicable laws. For questions about AI features or data processing, contact the Service Provider.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Third-Party Access -->
+  <section id="third-party">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <h2>Third-Party Access</h2>
+    </div>
+    <div class="card">
+      <p>Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application. Your information may be shared with third parties in ways described in this policy.</p>
+      <p>The Service Provider may disclose information:</p>
+      <ul>
+        <li>As required by law, such as in response to a subpoena or similar legal process</li>
+        <li>When necessary in good faith to protect rights, safety, or to investigate fraud</li>
+        <li>With trusted service providers who work on behalf of the Service Provider and have agreed to adhere to the rules set forth in this privacy policy</li>
+      </ul>
+      <p>The Application uses the following third-party services, each governed by their own privacy policies:</p>
+      <ul class="link-list">
+        <li><a href="https://www.google.com/policies/privacy/" target="_blank" rel="noopener">Google Play Services</a></li>
+        <li><a href="https://firebase.google.com/support/privacy/" target="_blank" rel="noopener">Google Analytics for Firebase</a></li>
+        <li><a href="https://firebase.google.com/support/privacy/" target="_blank" rel="noopener">Firebase Crashlytics</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7. International Transfers -->
+  <section id="international">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <h2>International Data Transfers</h2>
+    </div>
+    <div class="card">
+      <p>The Service Provider or its third-party service providers may transfer personal data to countries outside your country of residence, including outside the European Economic Area (EEA). Where applicable law requires safeguards for international transfers, the Service Provider will use appropriate mechanisms, such as:</p>
+      <ul>
+        <li>Standard Contractual Clauses (SCCs) approved by the European Commission</li>
+        <li>Adequacy decisions or other legally recognized transfer mechanisms</li>
+        <li>Your consent, where required and legally permitted</li>
+      </ul>
+      <p>Data protection laws in other countries may differ from those in your jurisdiction. Where required by law, the Service Provider will apply appropriate safeguards and obtain any required consent.</p>
+    </div>
+  </section>
+
+  <!-- 8. Opt-Out -->
+  <section id="opt-out">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <h2>Opt-Out Rights</h2>
+    </div>
+    <div class="card">
+      <p>You can stop further collection of information by uninstalling the Application. Uninstalling will stop the Application from collecting data from your device, but it does not automatically delete information already transmitted to the Service Provider or third parties.</p>
+      <div class="callout">
+        <p>To request deletion of your personal data, withdraw consent, or exercise any of your rights, contact: <a href="mailto:iamechoe.official@gmail.com" class="mailto">iamechoe.official@gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Data Retention -->
+  <section id="retention">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <h2>Data Retention Policy</h2>
+    </div>
+    <div class="card">
+      <p>The Service Provider retains personal data based on its necessity for the stated purposes:</p>
+      <div class="retention-grid" style="margin: 1.25rem 0;">
+        <div class="retention-row head">
+          <div class="retention-cell">Data Type</div>
+          <div class="retention-cell">Retention Period</div>
+        </div>
+        <div class="retention-row">
+          <div class="retention-cell">User Provided Data</div>
+          <div class="retention-cell">Duration of use + 12 months (or longer if required by law)</div>
+        </div>
+        <div class="retention-row">
+          <div class="retention-cell">Automatically Collected Data</div>
+          <div class="retention-cell">Up to 24 months from collection</div>
+        </div>
+        <div class="retention-row">
+          <div class="retention-cell">Aggregated / Anonymized Data</div>
+          <div class="retention-cell">Indefinitely (no longer identifies you)</div>
+        </div>
+        <div class="retention-row">
+          <div class="retention-cell">Legal Compliance Data</div>
+          <div class="retention-cell">As required by applicable law</div>
+        </div>
+      </div>
+      <p>You may request deletion of your personal data subject to any legal obligation to retain it. Contact the Service Provider at <a href="mailto:iamechoe.official@gmail.com" class="mailto">iamechoe.official@gmail.com</a>. Note that some data may be required for the Application to function properly.</p>
+    </div>
+  </section>
+
+  <!-- 10. Children -->
+  <section id="children">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <h2>Children</h2>
+    </div>
+    <div class="card">
+      <p>The Application is not intended for children under 10 years of age, or such higher age as required by applicable law. The Service Provider does not knowingly solicit data from or market the Application to children.</p>
+      <p>In the event the Service Provider discovers that a child has provided personal information, that information will be immediately deleted. If you are a parent or guardian and believe your child has provided personal information, please contact:</p>
+      <div class="callout">
+        <p><a href="mailto:iamechoe.official@gmail.com" class="mailto">iamechoe.official@gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Security -->
+  <section id="security">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <h2>Security</h2>
+    </div>
+    <div class="card">
+      <p>The Service Provider is committed to safeguarding the confidentiality of your information and provides physical, electronic, and procedural safeguards to protect the information processed and maintained.</p>
+    </div>
+  </section>
+
+  <!-- 12. Data Breach -->
+  <section id="breach">
+    <div class="section-header">
+      <div class="section-num">12</div>
+      <h2>Data Breach Notification</h2>
+    </div>
+    <div class="card">
+      <p>If a data breach occurs that affects your personal data, the Service Provider will notify you in accordance with applicable legal requirements, including — where required — information about the nature of the breach and the steps being taken to address it.</p>
+    </div>
+  </section>
+
+  <!-- 13. Changes -->
+  <section id="changes">
+    <div class="section-header">
+      <div class="section-num">13</div>
+      <h2>Changes to This Policy</h2>
+    </div>
+    <div class="card">
+      <p>The Service Provider may update this Privacy Policy from time to time. Material changes will be communicated by posting the updated policy with a new effective date. Where required by law, your consent to material changes will be sought before they take effect.</p>
+      <p>Previous versions of this Privacy Policy will be maintained and made available upon request at <a href="mailto:iamechoe.official@gmail.com" class="mailto">iamechoe.official@gmail.com</a>.</p>
+    </div>
+  </section>
+
+  <!-- 14. Contact -->
+  <section id="contact">
+    <div class="section-header">
+      <div class="section-num">14</div>
+      <h2>Contact Us</h2>
+    </div>
+    <div class="card">
+      <p>If you have any questions or concerns about this Privacy Policy or the practices of the Application, please reach out:</p>
+      <div class="callout">
+        <p>
+          <strong>Surag VC</strong> — Service Provider for Echoes<br />
+          <a href="mailto:iamechoe.official@gmail.com" class="mailto">iamechoe.official@gmail.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <span class="footer-logo">Echoes</span>
+      <span class="footer-contact">Questions? <a href="mailto:iamechoe.official@gmail.com">iamechoe.official@gmail.com</a></span>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Surag VC. All rights reserved.</span>
+      <span>Effective: June 4, 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reading progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const pct = max > 0 ? (scrolled / max) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+
+  // Staggered section reveals on scroll
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = '0s';
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  sections.forEach(s => {
+    s.style.animationPlayState = 'paused';
+    observer.observe(s);
+  });
+</script>
+</body>
+</html>
