@@ -84,13 +84,21 @@
       font-weight: 600;
       letter-spacing: 0.04em;
     }
-    .header-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
     }
+    .header-nav a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .header-nav a:hover { color: var(--ink); }
+    .header-nav a.active { color: var(--accent); }
 
     /* ── hero ─────────────────────────────────────── */
     .hero {
@@ -384,13 +392,18 @@
       color: #fff;
       letter-spacing: 0.04em;
     }
-    .footer-contact {
-      font-size: 0.85rem;
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
     }
-    .footer-contact a {
-      color: #d4a85a;
+    .footer-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
       text-decoration: none;
+      transition: color 0.2s;
     }
+    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-links a.current { color: #d4a85a; }
     .footer-bottom {
       font-size: 0.78rem;
       border-top: 1px solid rgba(255,255,255,0.1);
@@ -418,10 +431,18 @@
 <header>
   <div class="header-inner">
     <a href="#" class="logo">
-      
+      <div class="logo-mark">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3" fill="white"/>
+          <circle cx="8" cy="8" r="6" stroke="white" stroke-width="1.2" fill="none" opacity="0.5"/>
+        </svg>
+      </div>
       <span class="logo-name">Echoes</span>
     </a>
-    <span class="header-label">Privacy Policy</span>
+    <nav class="header-nav">
+      <a href="privacy-policy.html" class="active">Privacy Policy</a>
+      <a href="child-safety-policy.html">Child Safety</a>
+    </nav>
   </div>
 </header>
 
@@ -716,7 +737,10 @@
   <div class="footer-inner">
     <div class="footer-top">
       <span class="footer-logo">Echoes</span>
-      <span class="footer-contact">Questions? <a href="mailto:iamechoe.official@gmail.com">iamechoe.official@gmail.com</a></span>
+      <div class="footer-links">
+        <a href="privacy-policy.html" class="current">Privacy Policy</a>
+        <a href="child-safety-policy.html">Child Safety</a>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Surag VC. All rights reserved.</span>

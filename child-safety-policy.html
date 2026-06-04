@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Child Safety Standards — Echoes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f5f7fa;
+      --surface:   #ffffff;
+      --ink:       #141820;
+      --muted:     #5a6070;
+      --accent:    #1e5fa8;
+      --accent-lt: #ddeaf8;
+      --accent-dk: #163f6e;
+      --danger:    #c0392b;
+      --danger-lt: #fdf0ee;
+      --rule:      #dde3ec;
+      --radius:    14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* ── progress bar ─────────────────────────────── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent) 0%, #4a9be8 100%);
+      z-index: 999;
+      transition: width 0.1s linear;
+    }
+
+    /* ── header ───────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(245,247,250,0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      z-index: 100;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      gap: 1rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: var(--ink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-mark svg { display: block; }
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .header-nav a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .header-nav a:hover { color: var(--ink); }
+    .header-nav a.active {
+      color: var(--accent);
+    }
+
+    /* ── hero ─────────────────────────────────────── */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem) 3rem;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px; height: 1px;
+      background: var(--accent);
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+    }
+    .hero-sub {
+      font-size: 0.96rem;
+      color: var(--muted);
+      max-width: 540px;
+    }
+    .hero-meta {
+      margin-top: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .meta-pill {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .meta-pill .label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta-pill .value {
+      font-size: 0.88rem;
+      color: var(--ink);
+    }
+
+    /* zero-tolerance banner */
+    .zt-banner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+    .zt-banner-inner {
+      background: var(--ink);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .zt-icon {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .zt-text .zt-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .zt-text p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.7);
+      margin: 0;
+    }
+
+    /* ── divider ──────────────────────────────────── */
+    .divider {
+      max-width: 860px;
+      margin: 2.5rem auto 0;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+    .divider hr { border: none; border-top: 1px solid var(--rule); }
+
+    /* ── toc ──────────────────────────────────────── */
+    .toc-wrap {
+      max-width: 860px;
+      margin: 2.5rem auto 0;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+    .toc {
+      background: var(--accent-lt);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+    }
+    .toc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .toc ol {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.4rem 2rem;
+      counter-reset: toc;
+    }
+    .toc ol li {
+      counter-increment: toc;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .toc ol li::before {
+      content: counter(toc, decimal-leading-zero);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--accent);
+      min-width: 22px;
+    }
+    .toc ol li a {
+      font-size: 0.86rem;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc ol li a:hover { color: var(--accent); }
+
+    /* ── main content ─────────────────────────────── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem clamp(1.5rem, 5vw, 4rem) 6rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+      animation: fadeUp 0.4s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1.25rem;
+    }
+    .section-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      background: var(--ink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+    }
+
+    p {
+      color: #2e3340;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      padding-left: 0;
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+    ul li {
+      padding: 0.35rem 0 0.35rem 1.4rem;
+      position: relative;
+      font-size: 0.95rem;
+      color: #2e3340;
+    }
+    ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* callout blocks */
+    .callout {
+      background: var(--accent-lt);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .callout p { color: #1a3a5e; margin: 0; font-size: 0.9rem; }
+
+    .callout.danger {
+      background: var(--danger-lt);
+      border-left-color: var(--danger);
+    }
+    .callout.danger p { color: #6b1a14; }
+
+    /* prohibited grid */
+    .prohibited-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+    .prohibited-item {
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      background: var(--bg);
+    }
+    .prohibited-item .p-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.4rem;
+    }
+    .prohibited-item .p-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--danger);
+      flex-shrink: 0;
+    }
+    .prohibited-item .p-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--danger);
+    }
+    .prohibited-item p {
+      font-size: 0.87rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* enforcement steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .step {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .step:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #fff;
+      margin-top: 2px;
+    }
+    .step-body { flex: 1; }
+    .step-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .step-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* contact card */
+    .contact-card {
+      background: var(--ink);
+      border-radius: var(--radius);
+      padding: 2rem;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-card .cc-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .contact-card .cc-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+    .contact-card .cc-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      color: #a8c8f0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      transition: background 0.2s;
+      width: fit-content;
+    }
+    .contact-card .cc-email:hover { background: rgba(255,255,255,0.18); }
+    .contact-card .cc-note {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      margin: 0;
+    }
+
+    a.mailto {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    a.mailto:hover { border-color: var(--accent); }
+
+    /* ── footer ───────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.55);
+      padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+    }
+    .footer-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-links a.current { color: #a8c8f0; }
+    .footer-contact {
+      font-size: 0.85rem;
+    }
+    .footer-contact a { color: #a8c8f0; text-decoration: none; }
+    .footer-bottom {
+      font-size: 0.78rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 600px) {
+      .toc ol { grid-template-columns: 1fr; }
+      .hero-meta { gap: 1.25rem; }
+      .prohibited-grid { grid-template-columns: 1fr; }
+      .zt-banner-inner { flex-direction: column; align-items: flex-start; }
+      .header-nav { gap: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ── Header ────────────────────────────────────────────── -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3" fill="white"/>
+          <circle cx="8" cy="8" r="6" stroke="white" stroke-width="1.2" fill="none" opacity="0.5"/>
+        </svg>
+      </div>
+      <span class="logo-name">Echoes</span>
+    </a>
+    <nav class="header-nav">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="child-safety-policy.html" class="active">Child Safety</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-eyebrow">Legal Document</div>
+  <h1>Child Safety<br><em>Standards &amp; CSAE Policy</em></h1>
+  <p class="hero-sub">
+    Echoes is committed to maintaining a safe environment for all users. This policy outlines our strict stance against child sexual abuse and exploitation.
+  </p>
+  <div class="hero-meta">
+    <div class="meta-pill">
+      <span class="label">Last Updated</span>
+      <span class="value">June 2026</span>
+    </div>
+    <div class="meta-pill">
+      <span class="label">App</span>
+      <span class="value">Echoes</span>
+    </div>
+    <div class="meta-pill">
+      <span class="label">Developer</span>
+      <span class="value">Surag VC</span>
+    </div>
+    <div class="meta-pill">
+      <span class="label">Minimum Age</span>
+      <span class="value">16 years</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Zero Tolerance Banner ─────────────────────────────── -->
+<div class="zt-banner">
+  <div class="zt-banner-inner">
+    <div class="zt-icon">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M11 2L13.5 8H20L14.5 12L16.5 18L11 14L5.5 18L7.5 12L2 8H8.5L11 2Z" fill="white" opacity="0.9"/>
+      </svg>
+    </div>
+    <div class="zt-text">
+      <div class="zt-title">Zero Tolerance Policy</div>
+      <p>Echoes enforces a strict, unconditional zero-tolerance stance against all forms of Child Sexual Abuse and Exploitation (CSAE). Violations result in immediate account termination and legal reporting.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><hr /></div>
+
+<!-- ── Table of Contents ─────────────────────────────────── -->
+<div class="toc-wrap">
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#commitment">Our Commitment</a></li>
+      <li><a href="#age-restriction">Age Restriction</a></li>
+      <li><a href="#prohibited">Prohibited Content</a></li>
+      <li><a href="#reporting">Reporting Mechanism</a></li>
+      <li><a href="#enforcement">Enforcement &amp; Legal</a></li>
+      <li><a href="#contact">Safety Contact</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- ── Main ──────────────────────────────────────────────── -->
+<main>
+
+  <!-- 1. Commitment -->
+  <section id="commitment">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <h2>Our Commitment to Child Safety</h2>
+    </div>
+    <div class="card">
+      <p>Echoes and its developer, Surag VC, maintain a strict, zero-tolerance policy against Child Sexual Abuse and Exploitation (CSAE). We are committed to providing a safe digital environment and strictly prohibit any content, behavior, or interaction that sexually exploits, abuses, or endangers children.</p>
+      <div class="callout">
+        <p>Any user found engaging in conduct that endangers or exploits a child will be permanently removed from the platform and reported to relevant authorities without exception.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Age Restriction -->
+  <section id="age-restriction">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <h2>Age Restriction</h2>
+    </div>
+    <div class="card">
+      <p>Echoes is restricted to users aged <strong>16 years and older</strong>. This applies globally regardless of local age-of-majority laws.</p>
+      <div class="callout">
+        <p>Accounts identified as belonging to individuals under the required age limit will be <strong>immediately and permanently terminated</strong>, and any associated data will be deleted in accordance with our data retention policy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Prohibited Content -->
+  <section id="prohibited">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <h2>Prohibited Content and Behavior</h2>
+    </div>
+    <div class="card">
+      <p>While Echoes is designed with privacy in mind — meaning users do not upload personal images and cannot view the public profiles of others — we actively prohibit any form of exploitation through text, audio, or external links. The following behaviors are strictly prohibited:</p>
+      <div class="prohibited-grid">
+        <div class="prohibited-item">
+          <div class="p-label">
+            <div class="p-dot"></div>
+            <span class="p-name">CSAM</span>
+          </div>
+          <p>Sharing or linking to any visual depiction of a minor engaged in sexually explicit conduct (Child Sexual Abuse Material).</p>
+        </div>
+        <div class="prohibited-item">
+          <div class="p-label">
+            <div class="p-dot"></div>
+            <span class="p-name">Grooming</span>
+          </div>
+          <p>Befriending or attempting to build a relationship with a minor for the purpose of sexual contact or exploitation.</p>
+        </div>
+        <div class="prohibited-item">
+          <div class="p-label">
+            <div class="p-dot"></div>
+            <span class="p-name">Sextortion</span>
+          </div>
+          <p>Threatening or blackmailing a minor using real or alleged access to intimate imagery.</p>
+        </div>
+        <div class="prohibited-item">
+          <div class="p-label">
+            <div class="p-dot"></div>
+            <span class="p-name">Trafficking</span>
+          </div>
+          <p>Advertising or soliciting a minor for commercial sexual exploitation of any kind.</p>
+        </div>
+      </div>
+      <div class="callout danger">
+        <p>This list is not exhaustive. Any behavior that endangers the safety or wellbeing of a child — whether or not explicitly listed — is prohibited and subject to the same enforcement actions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Reporting -->
+  <section id="reporting">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <h2>In-App Feedback and Reporting Mechanism</h2>
+    </div>
+    <div class="card">
+      <p>User safety is our highest priority. If you encounter any suspicious behavior, inappropriate content, or suspected CSAE activity within Echoes, we urge you to report it immediately.</p>
+      <p>Users can submit reports through:</p>
+      <ul>
+        <li>The <strong>in-app reporting tools</strong> available within the Echoes application</li>
+        <li>Directly contacting our dedicated safety team by email (see Section 6 below)</li>
+      </ul>
+      <div class="callout">
+        <p>All reports are treated with strict confidentiality and reviewed by our safety team promptly. We do not retaliate against users for good-faith reports.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Enforcement -->
+  <section id="enforcement">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <h2>Enforcement and Legal Compliance</h2>
+    </div>
+    <div class="card">
+      <p>We take immediate and decisive action against any user found violating our Child Safety Standards. Confirmed or suspected violations trigger the following response:</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Immediate Account Termination</div>
+            <p class="step-desc">The offending user's account is permanently suspended without appeal.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Evidence Preservation</div>
+            <p class="step-desc">Relevant data is preserved in accordance with applicable law to support any investigation.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Authority Reporting</div>
+            <p class="step-desc">Cases are reported immediately to the National Center for Missing &amp; Exploited Children (NCMEC) or appropriate regional law enforcement agencies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Contact -->
+  <section id="contact">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <h2>Designated Child Safety Contact</h2>
+    </div>
+    <p style="font-size:0.95rem; color: var(--muted); margin-bottom: 1.25rem;">For urgent child safety concerns, CSAE reports, or law enforcement inquiries regarding our child safety practices, contact our designated Child Safety Point of Contact:</p>
+    <div class="contact-card">
+      <div>
+        <div class="cc-label">Designated Point of Contact</div>
+        <div class="cc-name">Surag VC</div>
+      </div>
+      <a href="mailto:iamechoe.official@gmail.com" class="cc-email">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <rect x="1" y="3" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M1.5 4L7.5 8.5L13.5 4" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+        iamechoe.official@gmail.com
+      </a>
+      <p class="cc-note">This inbox is monitored for child safety reports and law enforcement requests. All communications are treated with strict confidentiality.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <span class="footer-logo">Echoes</span>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="child-safety-policy.html" class="current">Child Safety</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Surag VC. All rights reserved.</span>
+      <span>Last updated: June 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reading progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const pct = max > 0 ? (scrolled / max) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+
+  // Staggered section reveals
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = '0s';
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  sections.forEach(s => {
+    s.style.animationPlayState = 'paused';
+    observer.observe(s);
+  });
+</script>
+</body>
+</html>
